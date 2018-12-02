@@ -1,11 +1,19 @@
 //helpers
 @import "./helpers/color";
+@import "helpers/settins";
 @import "./helpers/display";
 @import "./helpers/size";
 @import "helpers/flex";
+@import "helpers/spasing";
+
 
 //blocks
 @import "./blocks/main-menu";
 
 //base
 @import "./base/reset";
+@import "./base/text";
+
+//components
+
+@import "components/paragraph";

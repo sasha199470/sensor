@@ -4,15 +4,22 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './components/root-component/app.component';
 import {RouterModule} from './router/router.module';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import { EquipmentComponent } from './components/equipment/equipment.component';
+import { ReportComponent } from './components/report/report.component';
+import { DefectComponent } from './components/defect/defect.component';
+import {RouterRoutingModule} from './router/router-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    EquipmentComponent,
+    ReportComponent,
+    DefectComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule
+    RouterRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

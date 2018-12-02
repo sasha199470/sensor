@@ -1,9 +1,15 @@
 $base_color: #3e4eb8;
 $additional_color: #3746a5;
+$white_color: #fff;
 
 .base-bg {
   background-color: $base_color;
 }
-.additional-bg{
+
+.additional-bg {
   background-color: $additional_color;
+}
+
+.white-color {
+  color: $white_color;
 }

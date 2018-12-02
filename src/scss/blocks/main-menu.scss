@@ -1,3 +1,22 @@
-.main-menu {
+.menu {
   height: 52px;
+  .menu_main_active {
+    flex: 0 0 220px;
+  }
+  .menu_logo {
+    height: 35px;
+  }
+
+  .menu_item {
+    outline: none;
+    margin-right: 30.5px;
+    cursor: pointer;
+    opacity: 0.5;
+    .menu_item_img {
+      margin-right: 10.5px;
+    }
+    &_active {
+      opacity: 1;
+    }
+  }
 }
