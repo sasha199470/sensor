@@ -1,0 +1,38 @@
+.equipment-menu_item {
+  height: 48px;
+  cursor: pointer;
+  &.status {
+    border-right: 4px solid;
+    &_green {
+      border-color: $green;
+    }
+    &_gray {
+      border-color: $gray;
+    }
+    &_red {
+      border-color: $red;
+    }
+    &_yellow {
+      border-color: $yellow;
+    }
+  }
+  .equipment-menu_item_text {
+    flex: 0 0 218px;
+  }
+  &.deep_2 {
+    .equipment-menu_item_text {
+      flex: 0 0 198px;
+    }
+  }
+  &.deep_3 {
+    .equipment-menu_item_text {
+      flex: 0 0 178px;
+    }
+  }
+  img {
+    margin-left: 5px;
+    &.item_open {
+      transform: rotate(180deg);
+    }
+  }
+}

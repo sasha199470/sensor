@@ -1,6 +1,16 @@
-$base_color: #3e4eb8;
 $additional_color: #3746a5;
+$base_color: #3e4eb8;
+$text_color:#4a4a4a;
+$green :#89c540;
+$gray: #e3e4e9;
+$red:#ec4544;
+$yellow:#f0dd38;
+$panel_color: #f6f6f7;
+$sub-sub-item_color:#f9f8f9;
+$sub-item_color: #fbfbfc;
 $white_color: #fff;
+
+
 
 .base-bg {
   background-color: $base_color;
@@ -10,6 +20,29 @@ $white_color: #fff;
   background-color: $additional_color;
 }
 
+.panel_bg {
+  background-color: $panel_color;
+}
+
+.sub-item_bg {
+  background-color: $sub-item_color;
+}
+
+.sub-sub-item_bg {
+  background-color: $sub-sub-item_color;
+}
+
+.white_bg {
+  background-color: white;
+}
+
+
 .white-color {
   color: $white_color;
+}
+.text_color {
+  color: $text_color;
+}
+.base-color {
+  color: $base_color;
 }

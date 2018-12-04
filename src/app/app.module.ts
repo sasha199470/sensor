@@ -8,6 +8,7 @@ import { EquipmentComponent } from './components/equipment/equipment.component';
 import { ReportComponent } from './components/report/report.component';
 import { DefectComponent } from './components/defect/defect.component';
 import {RouterRoutingModule} from './router/router-routing.module';
+import { EquipmentMenuComponent } from './components/equipment/equipment-menu/equipment-menu.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {RouterRoutingModule} from './router/router-routing.module';
     MainMenuComponent,
     EquipmentComponent,
     ReportComponent,
-    DefectComponent
+    DefectComponent,
+    EquipmentMenuComponent
   ],
   imports: [
     BrowserModule,
