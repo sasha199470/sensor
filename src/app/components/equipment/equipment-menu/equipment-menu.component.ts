@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {EquipmentService} from '../../../services/equipment.service';
+import {Observable} from 'rxjs';
+import {Equipment} from '../../../dto/Equipment';
 
 @Component({
   selector: 'app-equipment-menu',
@@ -7,65 +10,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class EquipmentMenuComponent implements OnInit {
 
-  menu =
-    [
-      {
-        id: 10000,
-        title: "Паровой энергетический котел",
-        parentId: null,
-        equipmentStatus: "YELLOW",
-        depth: -1,
-        open: false,
-        children: [
-          {
-            id: 10100,
-            title: "Обмуровка котла",
-            parentId: 10000,
-            equipmentStatus: "ORANGE",
-            depth: 0,
-            children: [
-              {
-                id: 10100,
-                title: "Обмуровка котла",
-                parentId: 10000,
-                equipmentStatus: "ORANGE",
-                depth: 0,
-                children: [],
-                determinationProbability: 81,
-                failureDate: "PT18H29M2S",
-                stationaryModeDate: "PT18H32M3S",
-                startDate: "PT2012H49M19S"
-              }
-            ],
-            determinationProbability: 81,
-            failureDate: "PT18H29M2S",
-            stationaryModeDate: "PT18H32M3S",
-            startDate: "PT2012H49M19S"
-          },
-          {
-            id: 10200,
-            title: "Обмуровка котла",
-            parentId: 10000,
-            equipmentStatus: "ORANGE",
-            depth: 0,
-            children: [],
-            determinationProbability: 81,
-            failureDate: "PT18H29M2S",
-            stationaryModeDate: "PT18H32M3S",
-            startDate: "PT2012H49M19S"
-          }]
-},
-      {id: 10000,
-        title: "Паровой энергетический котел",
-        parentId: null,
-        equipmentStatus: "YELLOW",
-        depth: -1,
-        children: []}]
+  menu: Observable<Equipment[]>;
 
-  constructor() {
+  constructor(private equipmentService: EquipmentService) {
   }
 
   ngOnInit() {
+    this.menu = this.equipmentService.getEquipmentsMenu();
   }
 
   openItem(item) {

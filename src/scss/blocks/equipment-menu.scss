@@ -1,5 +1,5 @@
 .equipment-menu_item {
-  height: 48px;
+  min-height: 48px;
   cursor: pointer;
   &.status {
     border-right: 4px solid;
@@ -17,16 +17,17 @@
     }
   }
   .equipment-menu_item_text {
+    margin: 5px 0;
     flex: 0 0 218px;
   }
   &.deep_2 {
-    height: 40px;
+    min-height: 40px;
     .equipment-menu_item_text {
       flex: 0 0 198px;
     }
   }
   &.deep_3 {
-    height: 32px;
+    min-height: 32px;
     .equipment-menu_item_text {
       flex: 0 0 178px;
     }
