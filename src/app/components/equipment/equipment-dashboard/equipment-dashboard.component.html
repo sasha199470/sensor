@@ -1,3 +1,19 @@
-<pre>
-  {{ equipment | async | json }}
-</pre>
+<h1>Энергоблок</h1>
+<div *ngIf="equipment" class="row">
+  <div class="col-md-4">
+    <div class="block">
+      <p>Общий ИТС, %</p>
+      <p>Вероятность определения {{equipment.determinationProbability}}</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="block">
+      <p>Время до ухудшения</p>
+      <p>Вероятность определения {{equipment.determinationProbability}}</p>
+      <app-countdown [status]="equipment.equipmentStatus" [timeToFailure]="equipment.failureDate"></app-countdown>
+    </div>
+  </div>
+  <div class="col-md-4">
+
+  </div>
+</div>

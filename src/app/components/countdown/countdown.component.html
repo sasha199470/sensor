@@ -1,0 +1,13 @@
+<div class="d-flex align-items-baseline">
+  <div [ngClass]="'clock-board  status_'+ status.toLowerCase()">
+    {{hours}}
+  </div>
+  <div class="colon">:</div>
+  <div [ngClass]="'clock-board  status_'+ status.toLowerCase()">
+    {{minutes}}
+  </div>
+  <div class="colon">:</div>
+  <div [ngClass]="'clock-board  status_'+ status.toLowerCase()">
+    {{seconds}}
+  </div>
+</div>

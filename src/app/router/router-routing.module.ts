@@ -6,7 +6,7 @@ import {DefectComponent} from '../components/defect/defect.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'equipment/id010000', pathMatch: 'full' },
+  { path: '', redirectTo: 'equipment/10000', pathMatch: 'full' },
   { path: 'report', component: ReportComponent  },
   { path: 'defects', component: DefectComponent  },
   { path: 'equipment/:id', component: EquipmentComponent}

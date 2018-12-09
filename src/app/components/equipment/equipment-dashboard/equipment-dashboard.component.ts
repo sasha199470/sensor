@@ -12,16 +12,17 @@ import {flatMap, map} from 'rxjs/operators';
 })
 export class EquipmentDashboardComponent implements OnInit {
 
-  equipment: Observable<Equipment>;
+  equipment: Equipment;
 
   constructor(private route: ActivatedRoute, private equipmentService: EquipmentService) {
   }
 
   ngOnInit() {
-    this.equipment = this.route.params
+    this.route.params
       .pipe(
         flatMap(params => this.equipmentService.getEquipment(+params['id']))
-      );
+      )
+      .subscribe(equipment => this.equipment = equipment);
   }
 
 }

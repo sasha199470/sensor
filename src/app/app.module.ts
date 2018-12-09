@@ -10,6 +10,7 @@ import {RouterRoutingModule} from './router/router-routing.module';
 import { EquipmentMenuComponent } from './components/equipment/equipment-menu/equipment-menu.component';
 import {HttpClientModule} from '@angular/common/http';
 import { EquipmentDashboardComponent } from './components/equipment/equipment-dashboard/equipment-dashboard.component';
+import { CountdownComponent } from './components/countdown/countdown.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { EquipmentDashboardComponent } from './components/equipment/equipment-da
     ReportComponent,
     DefectComponent,
     EquipmentMenuComponent,
-    EquipmentDashboardComponent
+    EquipmentDashboardComponent,
+    CountdownComponent
   ],
   imports: [
     BrowserModule,

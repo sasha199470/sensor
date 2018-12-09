@@ -10,12 +10,15 @@
 //blocks
 @import "./blocks/main-menu";
 @import "./blocks/equipment-menu";
+@import "./blocks/block";
 
 //base
 @import "./base/reset";
 @import "./base/text";
 
 //components
-
 @import "components/paragraph";
 @import "components/headline";
+
+//bootstrap
+@import "bootstrap/bootstrap-grid";
