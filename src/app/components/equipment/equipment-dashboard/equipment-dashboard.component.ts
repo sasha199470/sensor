@@ -1,21 +1,21 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 import {Equipment} from '../../../dto/Equipment';
 import {EquipmentService} from '../../../services/equipment.service';
-import {flatMap, map} from 'rxjs/operators';
+import {flatMap} from 'rxjs/operators';
 import * as moment from 'moment';
-import {Duration} from 'moment';
-import {d} from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-equipment-dashboard',
   templateUrl: './equipment-dashboard.component.html',
-  styleUrls: ['./equipment-dashboard.component.css']
+  styleUrls: ['./equipment-dashboard.component.scss']
 })
 export class EquipmentDashboardComponent implements OnInit {
 
   equipment: Equipment;
+
+  currentStatus: string
+  statuses = ['gray', 'green', 'yellow', 'orange', 'red'];
 
   constructor(private route: ActivatedRoute, private equipmentService: EquipmentService) {
   }
@@ -25,7 +25,10 @@ export class EquipmentDashboardComponent implements OnInit {
       .pipe(
         flatMap(params => this.equipmentService.getEquipment(+params['id']))
       )
-      .subscribe(equipment => this.equipment = equipment);
+      .subscribe(equipment => {
+        this.equipment = equipment;
+        this.currentStatus = equipment.equipmentStatus.toLowerCase();
+      });
   }
 
   formDate(iso: string) {

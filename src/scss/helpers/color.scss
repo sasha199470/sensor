@@ -7,13 +7,19 @@ $paragraph_color:#9b9b9b;
 $gray: #e3e4e9;
 $red:#ec4544;
 $yellow:#f0dd38;
+$orange:#ffad33;
 $panel_color: #f6f6f7;
 $sub-sub-item_color:#f9f8f9;
 $sub-item_color: #fbfbfc;
 $white_color: #fff;
 
-
-
+$status-colors: (
+  gray: $gray,
+  green: $green,
+  yellow: $yellow,
+  orange: $orange,
+  red: $red
+);
 
 .base-bg {
   background-color: $base_color;

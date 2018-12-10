@@ -7,6 +7,7 @@ export class Equipment {
   children: Equipment[];
 
   determinationProbability: number;
+  itc: number;
   failureDate: string;
   stationaryModeDate: string;
   startDate: string;
