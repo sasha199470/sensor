@@ -1,22 +1,30 @@
-<h1>Энергоблок</h1>
+<p class="headline1 headline_color text-medium pb-3">Энергоблок</p>
 <div *ngIf="equipment" class="row">
-  <div class="col-md-4">
+  <div class="col-md">
     <div class="block">
-      <p>Общий ИТС, %</p>
-      <p>Вероятность определения {{equipment.determinationProbability}}</p>
+      <p class="headline2 headline_color text-medium pb-1">Общий ИТС, %</p>
+      <p class="paragraph-color paragraph_medium pb-3">Вероятность определения
+        {{equipment.determinationProbability}}</p>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md">
     <div class="block">
-      <p>Время до ухудшения</p>
-      <p>Вероятность определения {{equipment.determinationProbability}}</p>
+      <p class="headline2 headline_color text-medium pb-1">Время до ухудшения</p>
+      <p class="paragraph-color paragraph_medium pb-3">Вероятность определения
+        {{equipment.determinationProbability}}</p>
       <app-countdown [status]="equipment.equipmentStatus" [timeToFailure]="equipment.failureDate"></app-countdown>
     </div>
   </div>
-  <div class="col-md-4">
-    <p>В стационарном режиме</p>
-    {{formDate(equipment.stationaryModeDate)}}
-    <p>С запуска</p>
-    {{formDate(equipment.startDate)}}
+  <div class="col-md">
+    <div class="block d-flex flex-column justify-content-between">
+      <div>
+        <p class="headline2 text-medium text_color pb-1">В стационарном режиме</p>
+        <p class="text_color headline1 text-black">{{formDate(equipment.stationaryModeDate)}}</p>
+      </div>
+      <div>
+        <p class="headline2 text-medium text_color pb-1">С запуска</p>
+        <p class="text_color headline1 text-black">{{formDate(equipment.startDate)}}</p>
+      </div>
+    </div>
   </div>
 </div>

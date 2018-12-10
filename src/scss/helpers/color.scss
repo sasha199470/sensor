@@ -1,7 +1,9 @@
 $additional_color: #3746a5;
 $base_color: #3e4eb8;
 $text_color:#4a4a4a;
+$headline_color: #485465;
 $green :#89c540;
+$paragraph_color:#9b9b9b;
 $gray: #e3e4e9;
 $red:#ec4544;
 $yellow:#f0dd38;
@@ -12,8 +14,13 @@ $white_color: #fff;
 
 
 
+
 .base-bg {
   background-color: $base_color;
+}
+
+.gray-bg {
+  background-color: $gray;
 }
 
 .additional-bg {
@@ -36,7 +43,9 @@ $white_color: #fff;
   background-color: white;
 }
 
-
+.headline_color {
+  color: $headline_color;
+}
 .white-color {
   color: $white_color;
 }
@@ -45,4 +54,7 @@ $white_color: #fff;
 }
 .base-color {
   color: $base_color;
+}
+.paragraph-color{
+  color:$paragraph_color;
 }
