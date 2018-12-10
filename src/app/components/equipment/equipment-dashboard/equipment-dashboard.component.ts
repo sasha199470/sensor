@@ -14,8 +14,29 @@ export class EquipmentDashboardComponent implements OnInit {
 
   equipment: Equipment;
 
-  currentStatus: string
-  statuses = ['gray', 'green', 'yellow', 'orange', 'red'];
+  currentStatus: string;
+  statuses = [
+    {
+      color: 'gray',
+      value: '100—85%'
+    },
+    {
+      color: 'green',
+      value: '85—70%'
+    },
+    {
+      color: 'yellow',
+      value: '70—50%'
+    },
+    {
+      color: 'orange',
+      value: '50–25%'
+    },
+    {
+      color: 'red',
+      value: '25–0%'
+    }
+  ];
 
   constructor(private route: ActivatedRoute, private equipmentService: EquipmentService) {
   }

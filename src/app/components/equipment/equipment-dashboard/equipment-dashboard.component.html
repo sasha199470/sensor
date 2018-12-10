@@ -6,8 +6,11 @@
       <p class="paragraph-color paragraph_medium pb-3">Вероятность определения
         {{equipment.determinationProbability}}</p>
       <div class="d-flex align-items-end">
-        <div *ngFor="let status of statuses" [ngClass]="'itc-value itc-value-' + status">
-          <div *ngIf="status === currentStatus" class="itc-value-number">{{equipment.itc}}</div>
+        <div *ngFor="let status of statuses" class="base-flex">
+        <div [ngClass]="'itc-value itc-value-' + status.color">
+          <div *ngIf="status.color === currentStatus" class="itc-value-number">{{equipment.itc}}</div>
+        </div>
+          <p class="text-center paragraph_small paragraph-color">{{status.value}}</p>
         </div>
       </div>
     </div>
