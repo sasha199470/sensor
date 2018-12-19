@@ -6,10 +6,11 @@ import {DefectComponent} from '../components/defect/defect.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'equipment/10000', pathMatch: 'full' },
+  { path: '', redirectTo: 'equipment', pathMatch: 'full' },
   { path: 'report', component: ReportComponent  },
   { path: 'defects', component: DefectComponent  },
-  { path: 'equipment/:id', component: EquipmentComponent}
+  { path: 'equipment', component: EquipmentComponent  },
+  { path: 'equipment/:id', component: EquipmentComponent }
 ];
 
 @NgModule({
