@@ -1,0 +1,15 @@
+.dashboard-time {
+  width: 69px;
+  height: 20px;
+  border-radius: 20px;
+  border: 1px  $base_color solid ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $base_color;
+  cursor: pointer;
+  &.active {
+    color: white;
+    background-color: $base_color;
+  }
+}

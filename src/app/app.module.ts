@@ -11,6 +11,8 @@ import { EquipmentMenuComponent } from './components/equipment/equipment-menu/eq
 import {HttpClientModule} from '@angular/common/http';
 import { EquipmentDashboardComponent } from './components/equipment/equipment-dashboard/equipment-dashboard.component';
 import { CountdownComponent } from './components/countdown/countdown.component';
+import { EquipmentChartComponent } from './components/equipment/equipment-dashboard/equipment-chart/equipment-chart.component';
+import {ChartModule} from 'angular2-chartjs';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,14 @@ import { CountdownComponent } from './components/countdown/countdown.component';
     DefectComponent,
     EquipmentMenuComponent,
     EquipmentDashboardComponent,
-    CountdownComponent
+    CountdownComponent,
+    EquipmentChartComponent
   ],
   imports: [
     BrowserModule,
     RouterRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

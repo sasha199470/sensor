@@ -4,6 +4,7 @@ import {Equipment} from '../../../dto/Equipment';
 import {EquipmentService} from '../../../services/equipment.service';
 import {flatMap} from 'rxjs/operators';
 import * as moment from 'moment';
+import {tap} from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-equipment-dashboard',
@@ -13,7 +14,7 @@ import * as moment from 'moment';
 export class EquipmentDashboardComponent implements OnInit {
 
   equipment: Equipment;
-
+  id: number;
   currentStatus: string;
   statuses = [
     {
@@ -44,6 +45,7 @@ export class EquipmentDashboardComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .pipe(
+        tap(params => this.id = +params['id']),
         flatMap(params => this.equipmentService.getEquipment(+params['id']))
       )
       .subscribe(equipment => {
