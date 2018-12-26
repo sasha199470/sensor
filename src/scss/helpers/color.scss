@@ -4,7 +4,8 @@ $text_color:#4a4a4a;
 $headline_color: #485465;
 $green :#89c540;
 $paragraph_color:#9b9b9b;
-$gray: #e3e4e9;
+$gray: #dcdde0;
+$gray-bg: #e3e4e9;
 $red:#ec4544;
 $yellow:#f0dd38;
 $orange:#ffad33;
@@ -26,7 +27,7 @@ $status-colors: (
 }
 
 .gray-bg {
-  background-color: $gray;
+  background-color: $gray-bg;
 }
 
 .additional-bg {
