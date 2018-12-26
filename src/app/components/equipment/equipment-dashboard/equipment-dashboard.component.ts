@@ -45,8 +45,8 @@ export class EquipmentDashboardComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .pipe(
-        tap(params => this.id = +params['id']),
-        flatMap(params => this.equipmentService.getEquipment(+params['id']))
+        tap(params => this.id = +params['id'] || 0),
+        flatMap(params => this.equipmentService.getEquipment(+params['id'] || 0))
       )
       .subscribe(equipment => {
         this.equipment = equipment;
