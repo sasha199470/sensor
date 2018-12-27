@@ -27,7 +27,8 @@ export class EquipmentSchemeComponent implements OnInit {
 
   uid;
   svg = {'7f5fd9ab-7b9f-11e8-80bd-8f7ff119d44e':"0 0 1194 875",
-  '7f5fd9bf-7b9f-11e8-80bd-8f7ff119d44e':"0 0 1687 267"}
+  '7f5fd9bf-7b9f-11e8-80bd-8f7ff119d44e':"0 0 1687 267",
+  '7f5fd9c9-7b9f-11e8-80bd-8f7ff119d44e':"0 0 1564 923"}
 
   constructor(private equipmentService: EquipmentService) {
   }
