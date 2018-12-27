@@ -13,6 +13,7 @@ import { EquipmentDashboardComponent } from './components/equipment/equipment-da
 import { CountdownComponent } from './components/countdown/countdown.component';
 import { EquipmentChartComponent } from './components/equipment/equipment-dashboard/equipment-chart/equipment-chart.component';
 import {ChartModule} from 'angular2-chartjs';
+import { EquipmentSchemeComponent } from './components/equipment/equipment-dashboard/equipment-scheme/equipment-scheme.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {ChartModule} from 'angular2-chartjs';
     EquipmentMenuComponent,
     EquipmentDashboardComponent,
     CountdownComponent,
-    EquipmentChartComponent
+    EquipmentChartComponent,
+    EquipmentSchemeComponent
   ],
   imports: [
     BrowserModule,
