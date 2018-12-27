@@ -14,7 +14,7 @@ import {tap} from 'rxjs/internal/operators';
 export class EquipmentDashboardComponent implements OnInit {
 
   equipment: Equipment;
-  id: number;
+  id: string;
   currentStatus: string;
   statuses = [
     {
@@ -45,12 +45,13 @@ export class EquipmentDashboardComponent implements OnInit {
   ngOnInit() {
     this.route.params
       .pipe(
-        tap(params => this.id = +params['id'] || 0),
-        flatMap(params => this.equipmentService.getEquipment(+params['id'] || 0))
+        tap(params => this.id = params['id'] || 0),
+        flatMap(params => this.equipmentService.getEquipment(params['id'] || 0))
       )
       .subscribe(equipment => {
         this.equipment = equipment;
         this.currentStatus = equipment.equipmentStatus.toLowerCase();
+        document.querySelector('.id-7f5fd9ab-7b9f-11e8-80bd-8f7ff119d44e').classList.add("scheme-" + this.currentStatus)
       });
   }
 

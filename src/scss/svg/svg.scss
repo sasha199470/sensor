@@ -1,0 +1,11 @@
+svg{
+  &.scheme {
+    padding: 35px;
+  }
+  @each $name, $value in $status-colors {
+    .scheme-#{$name} {
+      fill: $value;
+    }
+  }
+}
+

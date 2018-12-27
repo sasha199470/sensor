@@ -18,11 +18,11 @@ export class EquipmentService {
     return this.http.get<Equipment[]>(`${this.BASE_URL}/equipment`);
   }
 
-  public getEquipment(id: number): Observable<Equipment> {
+  public getEquipment(id: string): Observable<Equipment> {
     return this.http.get<Equipment>(`${this.BASE_URL}/equipment/${id}`);
   }
 
-  public getDataset(numberPoints: number, chartDimension: string, id: number,
+  public getDataset(numberPoints: number, chartDimension: string, id: string,
                     middleDate: string): Observable<any> {
     let params = new HttpParams();
 

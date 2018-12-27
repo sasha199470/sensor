@@ -10,7 +10,7 @@ import * as moment from 'moment';
 })
 export class EquipmentChartComponent implements OnInit {
   @Input()
-  set id(id : number) {
+  set id(id : string) {
     this.uid = id;
     this.today();
   };
