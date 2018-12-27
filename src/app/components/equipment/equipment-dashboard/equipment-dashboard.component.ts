@@ -47,6 +47,7 @@ export class EquipmentDashboardComponent implements OnInit {
       .pipe(
         tap(params => this.id = params['id'] || 0),
         flatMap(params => this.equipmentService.getEquipment(params['id'] || 0))
+
       )
       .subscribe(equipment => {
         this.equipment = equipment;
