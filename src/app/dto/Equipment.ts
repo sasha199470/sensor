@@ -1,7 +1,7 @@
 export class Equipment {
   id: string;
   title: string;
-  parentId: number;
+  parentId: string;
   equipmentStatus: string;
   depth: number;
   children: Equipment[];

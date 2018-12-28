@@ -15,11 +15,15 @@ export class EquipmentService {
   }
 
   public getEquipmentsMenu(): Observable<Equipment[]> {
-    return this.http.get<Equipment[]>(`${this.BASE_URL}/equipment`);
+    return this.http.get<Equipment[]>(`${this.BASE_URL}/equipment/tree`);
   }
 
   public getEquipment(id: string): Observable<Equipment> {
     return this.http.get<Equipment>(`${this.BASE_URL}/equipment/${id}`);
+  }
+
+  public getAllEquipments(): Observable<Equipment[]> {
+    return this.http.get<Equipment[]>(`${this.BASE_URL}/equipment`);
   }
 
   public getEquipmentChildren(id: string): Observable<Equipment> {

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {EquipmentService} from '../../../services/equipment.service';
 import {Observable} from 'rxjs';
 import {Equipment} from '../../../dto/Equipment';
+import {EquipmentService} from '../../../services/equipment.service';
 
 @Component({
   selector: 'app-equipment-menu',
