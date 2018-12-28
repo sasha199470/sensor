@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Equipment} from '../../../dto/Equipment';
-import {EquipmentStoreService} from '../../../services/equipment-store.service';
+import {EquipmentService} from '../../../services/equipment.service';
 
 @Component({
   selector: 'app-equipment-menu',
@@ -12,11 +12,11 @@ export class EquipmentMenuComponent implements OnInit {
 
   menu: Observable<Equipment[]>;
 
-  constructor(private equipmentStoreService: EquipmentStoreService) {
+  constructor(private equipmentService: EquipmentService) {
   }
 
   ngOnInit() {
-    this.menu = this.equipmentStoreService.getEquipmentsMenu();
+    this.menu = this.equipmentService.getEquipmentsMenu();
   }
 
   openItem(item) {

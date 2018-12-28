@@ -1,10 +1,12 @@
-import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Equipment} from '../../../dto/Equipment';
 import {EquipmentService} from '../../../services/equipment.service';
-import {flatMap} from 'rxjs/operators';
+import {flatMap, map} from 'rxjs/operators';
 import * as moment from 'moment';
 import {tap} from 'rxjs/internal/operators';
+import {EquipmentStoreService} from '../../../services/equipment-store.service';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -12,11 +14,12 @@ import {tap} from 'rxjs/internal/operators';
   templateUrl: './equipment-dashboard.component.html',
   styleUrls: ['./equipment-dashboard.component.scss']
 })
-export class EquipmentDashboardComponent implements OnInit  {
+export class EquipmentDashboardComponent implements OnInit {
 
   equipment: Equipment;
   id: string;
   currentStatus: string;
+  breadCrumbs: string[] = [];
   statuses = [
     {
       color: 'gray',
@@ -40,7 +43,8 @@ export class EquipmentDashboardComponent implements OnInit  {
     }
   ];
 
-  constructor(private route: ActivatedRoute, private equipmentService: EquipmentService) {
+  constructor(private route: ActivatedRoute, private equipmentService: EquipmentService,
+              private equipmentsStore: EquipmentStoreService) {
   }
 
   ngOnInit() {
@@ -48,12 +52,13 @@ export class EquipmentDashboardComponent implements OnInit  {
       .pipe(
         tap(params => this.id = params['id'] || 0),
         flatMap(params => this.equipmentService.getEquipment(params['id'] || 0))
-
       )
       .subscribe(equipment => {
         this.equipment = equipment;
         this.currentStatus = equipment.equipmentStatus.toLowerCase();
-        });
+        this.resolveBreadCrumbs()
+          .subscribe(breadCrumbs => this.breadCrumbs = breadCrumbs(equipment));
+      });
   }
 
   formDate(iso: string) {
@@ -69,5 +74,22 @@ export class EquipmentDashboardComponent implements OnInit  {
       isFirst = !isFirst;
     }
     return `${result} ${duration.minutes()} м`;
+  }
+
+  private resolveBreadCrumbs(): Observable<(equipment: Equipment) => string[]> {
+    return this.equipmentsStore.getEquipments()
+      .pipe(
+        map(equipments => {
+          const breadCrumbs: string[] = [];
+          const resolver = (equipment: Equipment) => {
+            if (equipment.parentId != null) {
+              breadCrumbs.concat(resolver(equipments.get(equipment.parentId)));
+            }
+            breadCrumbs.push(equipment.title);
+            return breadCrumbs;
+          };
+          return resolver;
+        })
+      );
   }
 }

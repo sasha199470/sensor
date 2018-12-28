@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Equipment} from '../dto/Equipment';
 import {EquipmentService} from './equipment.service';
 import {Observable, of} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {isUndefined} from 'util';
 
 @Injectable({
@@ -10,18 +10,25 @@ import {isUndefined} from 'util';
 })
 export class EquipmentStoreService {
 
-  equipments: Equipment[];
+  equipments: Map<string, Equipment>;
 
   constructor(private equipmentService: EquipmentService) {
   }
 
-  public getEquipmentsMenu(): Observable<Equipment[]> {
+  public getEquipments(): Observable<Map<string, Equipment>> {
     if (!isUndefined(this.equipments)) {
       return of(this.equipments);
     }
-    return this.equipmentService.getEquipmentsMenu()
+    return this.equipmentService.getAllEquipments()
       .pipe(
-        tap(equipments => this.equipments = equipments)
+        map(equipments => this.collectToMap(equipments))
       );
+  }
+
+  private collectToMap(equipments: Equipment[]): Map<string, Equipment> {
+    this.equipments = new Map<string, Equipment>(
+      equipments.map(e => [e.id, e] as [string, Equipment])
+    );
+    return this.equipments;
   }
 }
