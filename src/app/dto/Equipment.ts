@@ -1,5 +1,5 @@
 export class Equipment {
-  id: number;
+  id: string;
   title: string;
   parentId: number;
   equipmentStatus: string;
@@ -7,8 +7,8 @@ export class Equipment {
   children: Equipment[];
 
   determinationProbability: number;
-  itc: number;
+  its: number;
   failureDate: string;
-  stationaryModeDate: string;
+  modeDate: string;
   startDate: string;
 }

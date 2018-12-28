@@ -8,7 +8,7 @@
       <div class="d-flex align-items-end">
         <div *ngFor="let status of statuses" class="base-flex">
         <div [ngClass]="'itc-value itc-value-' + status.color">
-          <div *ngIf="status.color === currentStatus" class="itc-value-number white-color">{{equipment.itc}}</div>
+          <div *ngIf="status.color === currentStatus" class="itc-value-number white-color">{{equipment.its}}</div>
         </div>
           <p class="text-center paragraph_small paragraph-color">{{status.value}}</p>
         </div>
@@ -23,11 +23,11 @@
       <app-countdown [status]="equipment.equipmentStatus" [timeToFailure]="equipment.failureDate"></app-countdown>
     </div>
   </div>
-  <div class="col-md">
+  <div class="col-md" *ngIf="equipment.modeDate">
     <div class="block d-flex flex-column justify-content-between">
       <div>
         <p class="headline2 text-medium text_color pb-1">В стационарном режиме</p>
-        <p class="text_color headline1 text-black">{{formDate(equipment.stationaryModeDate)}}</p>
+        <p class="text_color headline1 text-black">{{formDate(equipment.modeDate)}}</p>
       </div>
       <div>
         <p class="headline2 text-medium text_color pb-1">С запуска</p>

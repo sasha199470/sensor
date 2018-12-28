@@ -5,6 +5,10 @@ svg{
   @each $name, $value in $status-colors {
     .scheme-#{$name} {
       fill: $value;
+      //stroke: $value;
+    }
+    .scheme-str-#{$name} {
+      stroke: $value;
     }
   }
 }
