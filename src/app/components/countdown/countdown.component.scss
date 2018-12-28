@@ -1,18 +1,32 @@
 @import "helpers/color.scss";
+@import "helpers/settins.scss";
 
 .clock-board {
+  font-size: 17.6px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
   border-radius: 6px;
   background-color: #ffffff;
-  border: 2px solid;
-  padding: 10px;
-  font-size: 30px;
+  padding: 4px;
+  height: 32px;
+  width: 32px;
   font-weight: 900;
+  border: 1px solid;
   line-height: 1;
+  @media screen and (min-width: $xl){
+    border: 2px solid;
+    font-size: 30px;
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+  }
+  @media screen and (min-width: $lg){
+    font-size: 25px;
+    padding: 8px;
+    width: 47px;
+    height: 47px;
+  }
   &.status {
     &_green {
       border-color: $green;
@@ -33,7 +47,13 @@
 }
 
 .colon {
-  font-size: 32px;
+  font-size: 17px;
   line-height: 1;
   margin: 0 3px;
+  @media screen and (min-width: $xl){
+    font-size: 32px;
+  }
+  @media screen and (min-width: $lg){
+    font-size: 25px;
+  }
 }

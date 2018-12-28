@@ -1,29 +1,32 @@
 <p class="headline1 headline_color text-medium pb-3">Энергоблок</p>
 <div *ngIf="equipment" class="row">
-  <div class="col-md">
+  <div class="col-md px-1 px-lg-2">
     <div class="block">
       <p class="headline2 headline_color text-medium pb-1">Общий ИТС, %</p>
-      <p class="paragraph-color paragraph_medium pb-3">Вероятность определения
+      <p class="paragraph-color paragraph_midle pb-3">Вероятность определения
         {{equipment.determinationProbability}}</p>
       <div class="d-flex align-items-end">
-        <div *ngFor="let status of statuses" class="base-flex">
+        <div *ngFor="let status of statuses" [ngClass]="{'col-md-5': status.color === currentStatus}" class="col col-lg p-0">
         <div [ngClass]="'itc-value itc-value-' + status.color">
           <div *ngIf="status.color === currentStatus" class="itc-value-number white-color">{{equipment.its}}</div>
         </div>
-          <p class="text-center paragraph_small paragraph-color">{{status.value}}</p>
+          <div class="interest">
+          <p [ngClass]="{'d-none': status.color !== currentStatus}" class="text-center paragraph_small paragraph-color d-lg-block">
+            {{status.value}}</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-md">
+  <div class="col-md px-1 px-lg-2">
     <div class="block">
       <p class="headline2 headline_color text-medium pb-1">Время до ухудшения</p>
-      <p class="paragraph-color paragraph_medium pb-3">Вероятность определения
+      <p class="paragraph-color paragraph_midle pb-3">Вероятность определения
         {{equipment.determinationProbability}}</p>
       <app-countdown [status]="equipment.equipmentStatus" [timeToFailure]="equipment.failureDate"></app-countdown>
     </div>
   </div>
-  <div class="col-md" *ngIf="equipment.modeDate">
+  <div class="col-md px-1 px-lg-2" *ngIf="equipment.modeDate">
     <div class="block d-flex flex-column justify-content-between">
       <div>
         <p class="headline2 text-medium text_color pb-1">В стационарном режиме</p>

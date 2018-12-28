@@ -5,6 +5,9 @@ $grid-breakpoints: (
   lg: 992px,
   xl: 1200px
 ) !default;
+$md:768px;
+$lg:992px;
+$xl: 1200px;
 $spacer: 40px !default;
 $spacers: () !default;
 $spacers: map-merge((
