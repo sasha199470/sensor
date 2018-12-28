@@ -17,6 +17,10 @@
     min-height: 0px;
   }
 }
+.bread :last-child {
+  font-size: 18px;
+  font-weight: 500;
+}
 
 $height: 55px;
 @each $name, $value in $status-colors {

@@ -1,4 +1,7 @@
-<p class="headline1 headline_color text-medium pb-3">{{breadCrumbs.join(' - ')}}</p>
+<div class="headline_color paragraph_medium bread pb-3">
+  <span *ngFor="let bread of breadCrumbs; let i = index">{{bread + (i+1<breadCrumbs.length ? ' - ' : '')}}
+  </span>
+</div>
 <div *ngIf="equipment" class="row">
   <div class="col-md px-1 px-lg-2">
     <div class="block">
