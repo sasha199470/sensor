@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Equipment} from '../../../dto/Equipment';
+import {Equipment} from '../../../dto/equipment';
 import {EquipmentService} from '../../../services/equipment.service';
 import {flatMap, map} from 'rxjs/operators';
 import * as moment from 'moment';

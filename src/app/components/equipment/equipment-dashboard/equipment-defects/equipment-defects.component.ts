@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {DefectMessage} from '../../../../dto/defect-message';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-equipment-defects',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EquipmentDefectsComponent implements OnInit {
 
+  @Input() defectMessage: DefectMessage[];
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  formDate(date: string): string {
+    return moment(date).format('DD MMMM YYYY HH:mm:ss');
   }
 
 }

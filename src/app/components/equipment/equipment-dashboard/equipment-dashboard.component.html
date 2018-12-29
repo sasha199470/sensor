@@ -55,7 +55,8 @@
   </div>
   <div class="col-md-12 mt-3">
     <div class="block pb-0">
-      <app-equipment-defects></app-equipment-defects>
+      <app-equipment-defects *ngIf="equipment.defectMessage"
+                             [defectMessage]="equipment.defectMessage"></app-equipment-defects>
     </div>
   </div>
   <div class="col-12 mt-3">
