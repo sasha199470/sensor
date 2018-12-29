@@ -6,6 +6,7 @@ $green :#89c540;
 $paragraph_color:#9b9b9b;
 $gray: #dcdde0;
 $gray-bg: #e3e4e9;
+$border-gray: #ebeaea;
 $red:#ec4544;
 $yellow:#f0dd38;
 $orange:#ffad33;
@@ -64,4 +65,8 @@ $status-colors: (
 }
 .paragraph-color{
   color:$paragraph_color;
+}
+
+.border-gray-top {
+  border-top: 1px solid $border-gray;
 }

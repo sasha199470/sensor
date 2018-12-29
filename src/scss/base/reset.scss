@@ -1,6 +1,10 @@
+html {
+  height: 100%;
+}
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  height:100%;
 }
 a {
   text-decoration: none;
@@ -16,4 +20,7 @@ p {
 }
 svg:not(:root) {
   overflow: hidden;
+}
+.main {
+  min-height: calc(100% - 52px);
 }

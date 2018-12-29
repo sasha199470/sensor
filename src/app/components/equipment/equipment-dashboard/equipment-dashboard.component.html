@@ -9,13 +9,15 @@
       <p class="paragraph-color paragraph_midle pb-3">Вероятность определения
         {{equipment.determinationProbability}}</p>
       <div class="d-flex align-items-end">
-        <div *ngFor="let status of statuses" [ngClass]="{'col-md-5': status.color === currentStatus}" class="col col-lg p-0">
-        <div [ngClass]="'itc-value itc-value-' + status.color">
-          <div *ngIf="status.color === currentStatus" class="itc-value-number white-color">{{equipment.its}}</div>
-        </div>
+        <div *ngFor="let status of statuses" [ngClass]="{'col-md-5': status.color === currentStatus}"
+             class="col col-lg p-0">
+          <div [ngClass]="'itc-value itc-value-' + status.color">
+            <div *ngIf="status.color === currentStatus" class="itc-value-number white-color">{{equipment.its}}</div>
+          </div>
           <div class="interest">
-          <p [ngClass]="{'d-none': status.color !== currentStatus}" class="text-center paragraph_small paragraph-color d-lg-block">
-            {{status.value}}</p>
+            <p [ngClass]="{'d-none': status.color !== currentStatus}"
+               class="text-center paragraph_small paragraph-color d-lg-block">
+              {{status.value}}</p>
           </div>
         </div>
       </div>
@@ -46,9 +48,19 @@
       <app-equipment-chart [id]="id"></app-equipment-chart>
     </div>
   </div>
-  <div class="col-md mt-2">
-    <div  class="block">
-     <app-equipment-scheme [id]="id"></app-equipment-scheme>
+  <div class="col-md mt-3">
+    <div class="block">
+      <app-equipment-scheme [id]="id"></app-equipment-scheme>
+    </div>
+  </div>
+  <div class="col-md-12 mt-3">
+    <div class="block pb-0">
+      <app-equipment-defects></app-equipment-defects>
+    </div>
+  </div>
+  <div class="col-12 mt-3">
+    <div class="block">
+      <app-equipment-chart [id]="id"></app-equipment-chart>
     </div>
   </div>
 </div>
