@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {EquipmentService} from "../../../../services/equipment.service";
+import {Component, Input, OnInit} from '@angular/core';
+import {EquipmentService} from '../../../../services/equipment.service';
 import * as moment from 'moment';
 
 
@@ -10,17 +10,18 @@ import * as moment from 'moment';
 })
 export class EquipmentChartComponent implements OnInit {
   @Input()
-  set id(id : string) {
+  set id(id: string) {
     this.uid = id;
     this.today();
-  };
+  }
+
   uid;
-  max = 8640;
-  dashboardActive = 'today'
+  max = 100;
+  dashboardActive = 'today';
   hourLabels = ['00:00', '01:00', '02:00',
     '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00',
     '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
-    '19:00', '20:00', '21:00', '22:00', '23:00', '24:00']
+    '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'];
   type = 'line';
   data: any;
   options = {
@@ -33,8 +34,8 @@ export class EquipmentChartComponent implements OnInit {
         ticks: {
           fontSize: 0,
           showLabelBackdrop: false,
-          min:0,
-          max:100
+          min: 0,
+          max: 100
         }
       }],
 
@@ -44,12 +45,12 @@ export class EquipmentChartComponent implements OnInit {
     },
     tooltips: {
       backgroundColor: '#3e4eb8',
-      bodyFontColor:'white',
+      bodyFontColor: 'white',
       displayColors: false,
       titleFontSize: 0,
       callbacks: {
         label: function (tooltipItem, data) {
-          console.log(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index])
+          console.log(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
           return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] + '%';
         }
       }
@@ -62,46 +63,49 @@ export class EquipmentChartComponent implements OnInit {
 
 
   ngOnInit() {
-    this.today()
+    this.today();
   }
 
   today() {
-    this.dashboardActive = 'today'
+    this.dashboardActive = 'today';
     const today = moment().zone(0).hours(12);
     this.equipmentService.getDataset(25, 'HOUR',
       this.uid, today.toISOString(false)).subscribe(response => {
-      this.dashboard(response)
-    })
+      this.dashboard(response);
+    });
 
 
   }
+
   yesterday() {
-    this.dashboardActive = 'yesterday'
+    this.dashboardActive = 'yesterday';
     const yesterday = moment().subtract(1, 'days').zone(0).hours(12);
     this.equipmentService.getDataset(25, 'HOUR',
       this.uid, yesterday.toISOString(false)).subscribe(response => {
-      this.dashboard(response)
-    })
+      this.dashboard(response);
+    });
   }
+
   days(day) {
-    this.dashboardActive = day +'days'
+    this.dashboardActive = day + 'days';
     const today = moment();
     this.equipmentService.getDataset(day, 'DAY',
       this.uid, today.toISOString(false)).subscribe(response => {
-      this.dashboardDay(response)
-    })
+      this.dashboardDay(response);
+    });
   }
+
   dashboard(response) {
     let data1 = [];
     let data2 = [];
     response.valuesPast.forEach((item, index) => {
-      data1.push(Math.ceil(item*100/this.max));
+      data1.push(Math.ceil(item * 100 / this.max));
       data2.push(null);
 
     });
-    data1.push(Math.ceil(response.valuesFuture[0]*100/this.max));
+    data1.push(Math.ceil(response.valuesFuture[0] * 100 / this.max));
     response.valuesFuture.forEach((item, index) => {
-      data2.push(Math.ceil(item*100/this.max));
+      data2.push(Math.ceil(item * 100 / this.max));
     });
     this.data = {
       labels: this.hourLabels,
@@ -120,25 +124,26 @@ export class EquipmentChartComponent implements OnInit {
           borderDash: [10, 5]
         }
       ]
-    }
+    };
   }
 
   dashboardDay(response) {
     let data1 = [];
     let data2 = [];
     response.valuesPast.forEach((item, index) => {
-      data1.push(Math.ceil(item*100/this.max));
+      data1.push(Math.ceil(item * 100 / this.max));
       data2.push(null);
 
     });
-    data1.push(Math.ceil(response.valuesFuture[0]*100/this.max));
+    data1.push(Math.ceil(response.valuesFuture[0] * 100 / this.max));
     response.valuesFuture.forEach((item, index) => {
-      data2.push(Math.ceil(item*100/this.max));
+      data2.push(Math.ceil(item * 100 / this.max));
     });
     let lables = [];
     response.dates.forEach((item) => {
-      lables.push(moment(item).format('DD.MM'))
-    })
+      // lables.push(moment(item).format('DD.MM')); come back early
+      lables.push(moment(item).format('DD.MM HH:mm:ss'));
+    });
     this.data = {
       labels: lables,
       datasets: [
@@ -156,7 +161,7 @@ export class EquipmentChartComponent implements OnInit {
           borderDash: [10, 5]
         }
       ]
-    }
+    };
   }
 
 }

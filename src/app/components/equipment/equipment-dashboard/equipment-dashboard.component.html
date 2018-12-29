@@ -1,9 +1,9 @@
-<div class="headline_color paragraph_medium bread pb-3">
+<div *ngIf="breadCrumbs" class="headline_color paragraph_medium bread pb-3">
   <span *ngFor="let bread of breadCrumbs; let i = index">{{bread + (i+1<breadCrumbs.length ? ' - ' : '')}}
   </span>
 </div>
 <div *ngIf="equipment" class="row">
-  <div class="col-md px-1 px-lg-2">
+  <div *ngIf="equipment.its" class="col-md px-1 px-lg-2">
     <div class="block">
       <p class="headline2 headline_color text-medium pb-1">Общий ИТС, %</p>
       <p class="paragraph-color paragraph_midle pb-3">Вероятность определения
@@ -23,7 +23,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md px-1 px-lg-2">
+  <div *ngIf="equipment.failureDate" class="col-md px-1 px-lg-2">
     <div class="block">
       <p class="headline2 headline_color text-medium pb-1">Время до ухудшения</p>
       <p class="paragraph-color paragraph_midle pb-3">Вероятность определения
@@ -34,17 +34,17 @@
   <div class="col-md px-1 px-lg-2" *ngIf="equipment.modeDate">
     <div class="block d-flex flex-column justify-content-between">
       <div>
-        <p class="headline2 text-medium text_color pb-1">В стационарном режиме</p>
+        <p class="headline2 text-medium text_color pb-1">{{equipment.modeDescription}}</p>
         <p class="text_color headline1 text-black">{{formDate(equipment.modeDate)}}</p>
       </div>
-      <div>
+      <div *ngIf="equipment.startDate">
         <p class="headline2 text-medium text_color pb-1">С запуска</p>
         <p class="text_color headline1 text-black">{{formDate(equipment.startDate)}}</p>
       </div>
     </div>
   </div>
   <div class="col-12 mt-3">
-    <div class="block">
+    <div *ngIf="equipment.its" class="block">
       <app-equipment-chart [id]="id"></app-equipment-chart>
     </div>
   </div>

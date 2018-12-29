@@ -10,5 +10,7 @@ export class Equipment {
   its: number;
   failureDate: string;
   modeDate: string;
+  equipmentMode: string;
+  modeDescription: string;
   startDate: string;
 }
