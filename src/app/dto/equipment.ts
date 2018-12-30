@@ -1,3 +1,5 @@
+import {DefectMessage} from './defect-message';
+
 export class Equipment {
   id: string;
   title: string;
@@ -10,5 +12,9 @@ export class Equipment {
   its: number;
   failureDate: string;
   modeDate: string;
+  equipmentMode: string;
+  modeDescription: string;
   startDate: string;
+
+  defectMessage: DefectMessage[];
 }

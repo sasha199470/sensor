@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {Equipment} from '../../../dto/Equipment';
+import {Equipment} from '../../../dto/equipment';
 import {EquipmentService} from '../../../services/equipment.service';
 import {flatMap, map} from 'rxjs/operators';
 import * as moment from 'moment';
@@ -65,13 +65,20 @@ export class EquipmentDashboardComponent implements OnInit {
     const duration = moment.duration(iso);
     let result = '';
     let isFirst = true;
-    if (duration.days() > 0) {
+    if (duration.years() !== 0) {
+      result += `${duration.years()} г `;
+      isFirst = !isFirst;
+    }
+    if (!isFirst || duration.months() !== 0) {
+      result += `${duration.months()} м `;
+      isFirst = !isFirst;
+    }
+    if (!isFirst || duration.days() !== 0) {
       result += `${duration.days()} д `;
       isFirst = !isFirst;
     }
-    if (!isFirst || duration.hours() > 0) {
+    if (!isFirst || duration.hours() !== 0) {
       result += `${duration.hours()} ч `;
-      isFirst = !isFirst;
     }
     return `${result} ${duration.minutes()} м`;
   }
