@@ -15,6 +15,7 @@ import { EquipmentChartComponent } from './components/equipment/equipment-dashbo
 import {ChartModule} from 'angular2-chartjs';
 import { EquipmentSchemeComponent } from './components/equipment/equipment-dashboard/equipment-scheme/equipment-scheme.component';
 import { EquipmentDefectsComponent } from './components/equipment/equipment-dashboard/equipment-defects/equipment-defects.component';
+import { ChartSensorComponent } from './components/equipment/equipment-dashboard/chart-sensor/chart-sensor.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EquipmentDefectsComponent } from './components/equipment/equipment-dash
     CountdownComponent,
     EquipmentChartComponent,
     EquipmentSchemeComponent,
-    EquipmentDefectsComponent
+    EquipmentDefectsComponent,
+    ChartSensorComponent
   ],
   imports: [
     BrowserModule,

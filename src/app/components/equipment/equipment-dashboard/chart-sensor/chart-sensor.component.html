@@ -1,0 +1,14 @@
+<p class="headline2 headline_color text-medium pb-1">График ИТС</p>
+<div class="d-flex">
+  <div (click)="today()" class="dashboard-time paragraph_medium mr-1" [ngClass]="{'active': dashboardActive==='today'}">
+    Сегодня</div>
+  <div (click)="yesterday()" class="dashboard-time paragraph_medium mr-1" [ngClass]="{'active': dashboardActive==='yesterday'}">
+    Вчера</div>
+  <div (click)="days(7)" class="dashboard-time paragraph_medium mr-1" [ngClass]="{'active': dashboardActive==='7days'}">
+    7 дней </div>
+  <div (click)="days(9)" class="dashboard-time paragraph_medium mr-1" [ngClass]="{'active': dashboardActive==='9days'}">
+    9 дней </div>
+  <div (click)="days(30)" class="dashboard-time paragraph_medium mr-1" [ngClass]="{'active': dashboardActive==='30days'}">
+    30 дней </div>
+</div>
+<chart class="mt-3"  [type]="type" [data]="data" [options]="options"></chart>
