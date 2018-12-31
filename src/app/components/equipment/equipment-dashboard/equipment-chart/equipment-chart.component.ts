@@ -12,12 +12,12 @@ export class EquipmentChartComponent implements OnInit {
   @Input()
   set id(id: string) {
     this.uid = id;
-    this.today();
+    this.days(7);
   }
 
   uid;
   max = 100;
-  dashboardActive = 'today';
+  dashboardActive = '7days';
   hourLabels = ['00:00', '01:00', '02:00',
     '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00',
     '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
@@ -63,7 +63,6 @@ export class EquipmentChartComponent implements OnInit {
 
 
   ngOnInit() {
-    this.today();
   }
 
   today() {

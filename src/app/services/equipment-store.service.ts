@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-
 import {EquipmentService} from './equipment.service';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {isUndefined} from 'util';
-import {Equipment} from "../dto/equipment";
+import {Equipment} from '../dto/equipment';
 
 @Injectable({
   providedIn: 'root'
