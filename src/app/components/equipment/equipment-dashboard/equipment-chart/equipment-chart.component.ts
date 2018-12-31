@@ -114,14 +114,16 @@ export class EquipmentChartComponent implements OnInit {
           data: data1,
           backgroundColor: 'transparent',
           borderColor: '#3e4eb8',
-          borderWidth: 1
+          borderWidth: 1,
+          pointBackgroundColor:'#fff'
         },
         {
           data: data2,
           backgroundColor: 'transparent',
           borderColor: '#3e4eb8',
           borderWidth: 1,
-          borderDash: [10, 5]
+          borderDash: [10, 5],
+          pointBackgroundColor:'#fff'
         }
       ]
     };
@@ -151,14 +153,16 @@ export class EquipmentChartComponent implements OnInit {
           data: data1,
           backgroundColor: 'transparent',
           borderColor: '#3e4eb8',
-          borderWidth: 1
+          borderWidth: 1,
+          pointBackgroundColor:'#fff'
         },
         {
           data: data2,
           backgroundColor: 'transparent',
           borderColor: '#3e4eb8',
           borderWidth: 1,
-          borderDash: [10, 5]
+          borderDash: [10, 5],
+          pointBackgroundColor:'#fff'
         }
       ]
     };

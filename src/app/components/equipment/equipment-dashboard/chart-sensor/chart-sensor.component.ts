@@ -28,18 +28,16 @@ export class ChartSensorComponent implements OnInit {
     scales: {
       yAxes: [{
         display: true,
-        fontSize: 0,
-        ticks: {
-          fontSize: 0,
-          showLabelBackdrop: false,
-          min:0,
-          max:100
-        }
       }],
 
     },
     legend: {
       display: false,
+    },
+    plugins: {
+      filler: {
+        propagate: false
+      }
     },
     tooltips: {
       backgroundColor: '#3e4eb8',
@@ -91,33 +89,25 @@ export class ChartSensorComponent implements OnInit {
     })
   }
   dashboard(response) {
-    let data1 = [];
-    let data2 = [];
-    response.valuesPast.forEach((item, index) => {
-      data1.push(Math.ceil(item*100/this.max));
-      data2.push(null);
-
-    });
-    data1.push(Math.ceil(response.valuesFuture[0]*100/this.max));
-    response.valuesFuture.forEach((item, index) => {
-      data2.push(Math.ceil(item*100/this.max));
-    });
+    let data1 = response.valuesFuture;
     this.data = {
       labels: this.hourLabels,
       datasets: [
         {
-          data: data1,
-          backgroundColor: 'transparent',
+          data: [20,45,67,123,45,18],
           borderColor: '#3e4eb8',
-          borderWidth: 1
+          borderWidth: 2,
+          pointRadius:0,
+          pointHoverRadius:0,
+          backgroundColor:'rgba(43, 116, 198, 0.1)'
         },
         {
-          data: data2,
+          data: [,,,,,18],
           backgroundColor: 'transparent',
           borderColor: '#3e4eb8',
           borderWidth: 1,
-          borderDash: [10, 5]
-        }
+          pointBackgroundColor:'#fff'
+        },
       ]
     }
   }
@@ -143,16 +133,18 @@ export class ChartSensorComponent implements OnInit {
       datasets: [
         {
           data: data1,
-          backgroundColor: 'transparent',
           borderColor: '#3e4eb8',
-          borderWidth: 1
+          borderWidth: 2,
+          pointRadius:0,
+          pointHoverRadius:0,
+          backgroundColor:'rgba(43, 116, 198, 0.1)'
         },
         {
           data: data2,
           backgroundColor: 'transparent',
           borderColor: '#3e4eb8',
           borderWidth: 1,
-          borderDash: [10, 5]
+          pointBackgroundColor:'#fff'
         }
       ]
     }

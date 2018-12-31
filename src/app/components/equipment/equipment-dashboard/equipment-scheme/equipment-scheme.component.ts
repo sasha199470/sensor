@@ -9,20 +9,24 @@ import {EquipmentService} from "../../../../services/equipment.service";
 export class EquipmentSchemeComponent implements OnInit {
   @Input()
   set id(id: string) {
-    this.uid = id;
-    if (this.svg[this.uid]) {
-      document.querySelector('.scheme').setAttribute('viewBox',this.svg[this.uid].viewBox);
-      let id =  this.svg[this.uid].id || this.uid
-      document.querySelector('#scheme').setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",'#'+ id);
-      // this.equipmentService.getEquipmentChildren(this.uid).subscribe((response) => {
-      //   console.log(response);
-      //   let el = document.querySelector('.id-' + response.id);
-      //   if (el) {
-      //     el.classList.add("scheme-" + this.svg[this.uid].str + response.equipmentStatus.toLowerCase())
-      //   }
-      // })
-
+    let uid;
+    if (this.svg[id]) {
+      uid = this.svg[id].id;
     }
+    this.uid = uid || id;
+    // if (this.svg[this.uid]) {
+    //   document.querySelector('.scheme').setAttribute('viewBox',this.svg[this.uid].viewBox);
+    //   let id =
+    //   document.querySelector('#scheme').setAttributeNS("http://www.w3.org/1999/xlink","xlink:href",'#'+ id);
+    //   // this.equipmentService.getEquipmentChildren(this.uid).subscribe((response) => {
+    //   //   console.log(response);
+    //   //   let el = document.querySelector('.id-' + response.id);
+    //   //   if (el) {
+    //   //     el.classList.add("scheme-" + this.svg[this.uid].str + response.equipmentStatus.toLowerCase())
+    //   //   }
+    //   // })
+    //
+    // }
 
   };
 
