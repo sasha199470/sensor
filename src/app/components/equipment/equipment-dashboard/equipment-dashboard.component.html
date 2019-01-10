@@ -23,12 +23,17 @@
       </div>
     </div>
   </div>
-  <div *ngIf="equipment.failureDate" class="col-md px-1 px-lg-2">
+  <div class="col-md px-1 px-lg-2">
     <div class="block">
       <p class="headline2 headline_color text-medium pb-1">Время до ухудшения</p>
-      <p class="paragraph-color paragraph_midle pb-3">Вероятность определения
-        {{equipment.determinationProbability}}</p>
-      <app-countdown [status]="equipment.equipmentStatus" [timeToFailure]="equipment.failureDate"></app-countdown>
+      <div *ngIf="equipment.failureDate == null" class="col-md px-1 px-lg-2">
+        <p>Нет данных</p>
+      </div>
+      <div *ngIf="equipment.failureDate">
+        <p class="paragraph-color paragraph_midle pb-3">Вероятность определения
+          {{equipment.determinationProbability}}</p>
+        <app-countdown [status]="equipment.equipmentStatus" [timeToFailure]="equipment.failureDate"></app-countdown>
+      </div>
     </div>
   </div>
   <div class="col-md px-1 px-lg-2" *ngIf="equipment.modeDate">
@@ -56,12 +61,11 @@
   </div>
   <div class="col-md-12 mt-3">
     <div class="block pb-0">
-      <app-equipment-defects *ngIf="equipment.defectMessage"
-                             [defectMessage]="equipment.defectMessage"></app-equipment-defects>
+      <app-equipment-defects [defectMessages]="equipment.defectMessage"></app-equipment-defects>
     </div>
   </div>
   <div class="col-12 mt-3">
-    <div class="block">
+    <div class="block" *ngIf="id === 'dummyElemId'">
       <app-chart-sensor [id]="id"></app-chart-sensor>
     </div>
   </div>

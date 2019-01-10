@@ -1,4 +1,5 @@
 import {DefectMessage} from './defect-message';
+import {SensorData} from './sensor-data';
 
 export class Equipment {
   id: string;
@@ -17,4 +18,5 @@ export class Equipment {
   startDate: string;
 
   defectMessage: DefectMessage[];
+  sensorDataList: SensorData[];
 }

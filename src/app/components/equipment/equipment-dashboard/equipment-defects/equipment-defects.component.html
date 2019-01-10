@@ -1,21 +1,25 @@
-<p class="headline2 headline_color text-medium pb-3">Обнаруженные дефекты: {{defectMessage.length}}</p>
-<div *ngFor="let defect of defectMessage" class="border-gray-top py-3">
-  <div class="d-flex">
-    <div class="defect-left"></div>
-    <p class="paragraph-color paragraph_midle pb-1">
-      {{formDate(defect.date)}}
-    </p>
-  </div>
-  <div class="d-flex mb-2">
-    <div class="defect-left d-flex align-items-center">
-      <img src="/assets/img/defect.svg" alt="">
+<p *ngIf="defectMessages == null || defectMessages.length == 0"
+   class="headline2 headline_color text-medium pb-3">Нет дефектов</p>
+<div *ngIf="defectMessages && defectMessages.length != 0">
+  <p class="headline2 headline_color text-medium pb-3">Обнаруженные дефекты: {{defectMessages?.length}}</p>
+  <div *ngFor="let defect of defectMessages" class="border-gray-top py-3">
+    <div class="d-flex">
+      <div class="defect-left"></div>
+      <p class="paragraph-color paragraph_midle pb-1">
+        {{formDate(defect.date)}}
+      </p>
     </div>
-    <p class="text-medium headline3 headline_color">{{defect.text}}</p>
-  </div>
-  <div class="d-flex">
-    <div class="defect-left d-flex align-items-center">
-      <img src="/assets/img/ic-maintenance.svg" alt="">
+    <div class="d-flex mb-2">
+      <div class="defect-left d-flex align-items-center">
+        <img src="/assets/img/defect.svg" alt="">
+      </div>
+      <p class="text-medium headline3 headline_color">{{defect.text}}</p>
     </div>
-    <p class=" headline3 headline_color ">Паша, что тут писать?!</p>
+    <div class="d-flex">
+      <div class="defect-left d-flex align-items-center">
+        <img src="/assets/img/ic-maintenance.svg" alt="">
+      </div>
+      <p class=" headline3 headline_color ">Паша, что тут писать?!</p>
+    </div>
   </div>
 </div>

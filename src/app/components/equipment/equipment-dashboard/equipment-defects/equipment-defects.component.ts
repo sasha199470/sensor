@@ -9,7 +9,7 @@ import * as moment from 'moment';
 })
 export class EquipmentDefectsComponent implements OnInit {
 
-  @Input() defectMessage: DefectMessage[];
+  @Input() defectMessages: DefectMessage[];
 
   constructor() { }
 

@@ -1,22 +1,22 @@
 <div class="d-flex align-items-baseline text_color justify-content-center">
   <div>
-  <div [ngClass]="'clock-board  status_'+ status.toLowerCase()">
-    {{hours}}
+    <div [ngClass]="'clock-board  status_'+ status.toLowerCase()">
+      {{days}}
+    </div>
+    <p class="text-center paragraph_small paragraph-color">дни</p>
   </div>
+  <div class="colon">:</div>
+  <div>
+    <div [ngClass]="'clock-board  status_'+ status.toLowerCase()">
+      {{hours}}
+    </div>
     <p class="text-center paragraph_small paragraph-color">ч</p>
   </div>
   <div class="colon">:</div>
   <div>
-  <div [ngClass]="'clock-board  status_'+ status.toLowerCase()">
-    {{minutes}}
-  </div>
+    <div [ngClass]="'clock-board  status_'+ status.toLowerCase()">
+      {{minutes}}
+    </div>
     <p class="text-center paragraph_small paragraph-color">мин</p>
-  </div>
-  <div class="colon">:</div>
-  <div>
-  <div [ngClass]="'clock-board  status_'+ status.toLowerCase()">
-    {{seconds}}
-  </div>
-    <p class="text-center paragraph_small paragraph-color">сек</p>
   </div>
 </div>

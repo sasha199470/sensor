@@ -14,26 +14,31 @@ export class CountdownComponent implements OnChanges {
 
   interval: any;
 
+  days: string;
   hours: string;
   minutes: string;
-  seconds: string;
 
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
     clearInterval(this.interval);
-    const duration = moment.duration(this.timeToFailure);
-    this.tickTimer(duration);
-    this.interval = setInterval(() => {
+    let duration = moment.duration(this.timeToFailure);
+    if (duration.minutes() < 0) {
+      duration = moment.duration();
       this.tickTimer(duration);
-    }, 1000);
+    } else {
+      this.tickTimer(duration);
+      this.interval = setInterval(() => {
+        this.tickTimer(duration);
+      }, 1000 * 60);
+    }
   }
 
   private tickTimer(duration: Duration) {
     duration.subtract(1, 'seconds');
+    this.days = this.toFormat(duration.days());
     this.hours = this.toFormat(duration.hours());
     this.minutes = this.toFormat(duration.minutes());
-    this.seconds = this.toFormat(duration.seconds());
   }
 
   private toFormat(value: number): string {
