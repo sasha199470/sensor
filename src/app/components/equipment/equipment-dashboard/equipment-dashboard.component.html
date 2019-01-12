@@ -65,8 +65,8 @@
     </div>
   </div>
   <div class="col-12 mt-3">
-    <div class="block" *ngIf="id === 'dummyElemId'">
-      <app-chart-sensor [id]="id"></app-chart-sensor>
+    <div class="block" *ngFor="let sensor of equipment.sensors">
+      <app-chart-sensor [id]="sensor"></app-chart-sensor>
     </div>
   </div>
 </div>

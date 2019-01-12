@@ -16,6 +16,7 @@ export class Equipment {
   equipmentMode: string;
   modeDescription: string;
   startDate: string;
+  sensors: string[];
 
   defectMessage: DefectMessage[];
   sensorDataList: SensorData[];

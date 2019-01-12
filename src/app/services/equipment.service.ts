@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Equipment} from '../dto/equipment';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {SensorData} from '../dto/sensor-data';
 
 
 @Injectable({
@@ -28,6 +29,9 @@ export class EquipmentService {
 
   public getEquipmentChildren(id: string): Observable<Equipment> {
     return this.http.get<Equipment>(`${this.BASE_URL}/equipment/${id}/children`);
+  }
+  public getSensorData(id: string): Observable<SensorData[]> {
+    return this.http.get<SensorData[]>(`${this.BASE_URL}/sensor/${id}`);
   }
 
   public getDataset(numberPoints: number, chartDimension: string, id: string,
