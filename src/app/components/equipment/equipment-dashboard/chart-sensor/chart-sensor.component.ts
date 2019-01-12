@@ -19,7 +19,6 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
     this.dataset = [];
     this.labels = [];
     if (this.uid) {
-      console.log(5);
       this.socketSubscribe.unsubscribe();
     }
     this.uid = sensor.sensorName;
