@@ -64,8 +64,8 @@
       <app-equipment-defects [defectMessages]="equipment.defectMessage"></app-equipment-defects>
     </div>
   </div>
-  <div class="col-12 mt-3">
-    <div class="block" *ngFor="let sensor of equipment.sensors">
+  <div class="col-12 mt-3" *ngFor="let sensor of equipment.sensors">
+    <div class="block" >
       <app-chart-sensor [sensor]="sensor"></app-chart-sensor>
     </div>
   </div>
