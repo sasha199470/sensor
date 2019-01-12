@@ -106,7 +106,8 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
               borderWidth: 2,
               pointRadius: 0,
               pointHoverRadius: 0,
-              backgroundColor: 'rgba(43, 116, 198, 0.1)'
+              backgroundColor: 'rgba(43, 116, 198, 0.1)',
+              lineTension: 0,
             }
           ]
         };
