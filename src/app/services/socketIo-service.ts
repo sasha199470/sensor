@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {Injectable} from '@angular/core';
 import * as io from 'socket.io-client';
-import {Observable} from 'rxjs/index';
+import {Observable} from 'rxjs';
+import {SensorData} from '../dto/sensor-data';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +10,15 @@ export class SocketIoService {
 
   socketClient: SocketIOClient.Socket;
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.socketClient = io.connect('http://192.168.1.61:9090');
   }
 
-  public getSensorDate<SensorData>(id: string): Observable<SensorData> {
+  public getSensorDate(id: string): Observable<SensorData> {
     const socketClient = this.socketClient;
     return new Observable<SensorData>(observer => {
       const successListener = (value: SensorData) => {
-        console.log(value)
+        console.log(value);
         observer.next(value);
       };
       socketClient.emit('sensor-' + id);
@@ -30,7 +30,7 @@ export class SocketIoService {
           socketClient.removeListener('sensor-' + id + '-input', successListener);
         }
       };
-    })
+    });
   }
 
 

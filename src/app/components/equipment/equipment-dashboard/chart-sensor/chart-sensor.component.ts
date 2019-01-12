@@ -1,9 +1,8 @@
-///<reference path="../../../../../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import * as moment from 'moment';
-import {EquipmentService} from "../../../../services/equipment.service";
-import {SocketIoService} from "../../../../services/socketIo-service";
-import {Subscription} from "rxjs/index";
+import {EquipmentService} from '../../../../services/equipment.service';
+import {SocketIoService} from '../../../../services/socketIo-service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-chart-sensor',
@@ -18,21 +17,21 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
     this.dataset = [];
     this.labels = [];
     if (this.uid) {
-      console.log(5)
+      console.log(5);
       this.socketSubscribe.unsubscribe();
     }
     this.uid = id;
 
     this.today();
-  };
+  }
 
   uid;
   max = 8640;
-  dashboardActive = 'today'
+  dashboardActive = 'today';
   hourLabels = ['00:00', '01:00', '02:00',
     '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00',
     '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
-    '19:00', '20:00', '21:00', '22:00', '23:00', '24:00']
+    '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'];
   type = 'line';
   dataset = [];
   labels = [];
@@ -61,7 +60,7 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
       titleFontSize: 0,
       callbacks: {
         label: function (tooltipItem, data) {
-          console.log(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index])
+          console.log(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
           return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] + '%';
         }
       }
@@ -79,13 +78,13 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
   }
 
   today() {
-    this.dashboardActive = 'today'
+    this.dashboardActive = 'today';
     const today = moment().zone(0).hours(12);
     this.equipmentService.getSensorData(this.uid).subscribe(response => {
       this.dashboard(response);
-      this.socketSubscribe = this.socketIoService.getSensorDate(this.uid).subscribe((response) => {
+      this.socketSubscribe = this.socketIoService.getSensorDate(this.uid).subscribe(response => {
         console.log(moment(response.dateTime).format('HH:mm:ss'));
-        console.log(this.data.labels)
+        console.log(this.data.labels);
         if (this.labels.length < 18) {
 
           this.labels.push(moment(response.dateTime).format('HH:mm:ss'));
@@ -110,42 +109,42 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
               backgroundColor: 'rgba(43, 116, 198, 0.1)'
             }
           ]
-        }
+        };
       });
     });
   }
 
 
   yesterday() {
-    this.dashboardActive = 'yesterday'
+    this.dashboardActive = 'yesterday';
     const yesterday = moment().subtract(1, 'days').zone(0).hours(12);
     this.equipmentService.getDataset(25, 'HOUR',
       this.uid, yesterday.toISOString(false)).subscribe(response => {
       this.dashboard(response);
       this.socketSubscribe = this.socketIoService.getSensorDate(this.uid)
-        .subscribe((response) => {
+        .subscribe(response => {
           console.log(response);
           if (this.labels.length < 15) {
 
           }
         });
-    })
+    });
   }
 
   days(day) {
-    this.dashboardActive = day + 'days'
+    this.dashboardActive = day + 'days';
     const today = moment();
     this.equipmentService.getDataset(day, 'DAY',
       this.uid, today.toISOString(false)).subscribe(response => {
-      this.dashboardDay(response)
-    })
+      this.dashboardDay(response);
+    });
   }
 
   dashboard(response) {
     response.forEach((item) => {
       this.dataset.push(item.value);
       this.labels.push(moment(item.dateTime).format('HH:mm:ss'));
-    })
+    });
     this.data = {
       labels: this.labels,
       datasets: [
@@ -158,12 +157,12 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
           backgroundColor: 'rgba(43, 116, 198, 0.1)'
         }
       ]
-    }
+    };
   }
 
   dashboardDay(response) {
-    let data1 = [];
-    let data2 = [];
+    const data1 = [];
+    const data2 = [];
     response.valuesPast.forEach((item, index) => {
       data1.push(Math.ceil(item * 100 / this.max));
       data2.push(null);
@@ -173,10 +172,10 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
     response.valuesFuture.forEach((item, index) => {
       data2.push(Math.ceil(item * 100 / this.max));
     });
-    let lables = [];
+    const lables = [];
     response.dates.forEach((item) => {
-      lables.push(moment(item).format('DD.MM'))
-    })
+      lables.push(moment(item).format('DD.MM'));
+    });
     this.data = {
       labels: lables,
       datasets: [
@@ -196,12 +195,12 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
           pointBackgroundColor: '#fff'
         }
       ]
-    }
+    };
   }
 
   ngOnDestroy() {
     console.log(6);
-    console.log(this.socketSubscribe)
+    console.log(this.socketSubscribe);
     this.socketSubscribe.unsubscribe();
   }
 
