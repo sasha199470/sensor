@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import {EquipmentService} from '../../../../services/equipment.service';
 import {SocketIoService} from '../../../../services/socketIo-service';
 import {Subscription} from 'rxjs';
+import {SensorInfo} from '../../../../dto/sensor-info';
 
 @Component({
   selector: 'app-chart-sensor',
@@ -13,19 +14,22 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
   socketSubscribe: Subscription;
 
   @Input()
-  set id(id: string) {
+  set sensor(sensor: SensorInfo) {
+    console.log(sensor);
     this.dataset = [];
     this.labels = [];
     if (this.uid) {
       console.log(5);
       this.socketSubscribe.unsubscribe();
     }
-    this.uid = id;
+    this.uid = sensor.sensorName;
+    this.sensorDescription = sensor.description;
 
     this.today();
   }
 
-  uid;
+  uid: string;
+  sensorDescription: string;
   max = 8640;
   dashboardActive = 'today';
   hourLabels = ['00:00', '01:00', '02:00',
