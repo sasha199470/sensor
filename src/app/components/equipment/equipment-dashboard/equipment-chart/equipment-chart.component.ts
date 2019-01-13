@@ -1,6 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {EquipmentService} from '../../../../services/equipment.service';
 import * as moment from 'moment';
+import {ITS} from "../../../../dto/its";
+import {Subscription} from "rxjs/index";
+import {SocketIoService} from "../../../../services/socketIo-service";
 
 
 @Component({
@@ -8,11 +11,18 @@ import * as moment from 'moment';
   templateUrl: './equipment-chart.component.html',
   styleUrls: ['./equipment-chart.component.css']
 })
-export class EquipmentChartComponent implements OnInit {
+export class EquipmentChartComponent implements OnInit, OnDestroy {
   @Input()
   set id(id: string) {
+    this.labels = [];
+    this.labelsForse = [];
+    this.dataset = [];
+    this.datasetForse = [];
+    if (this.uid) {
+      this.itsSubscription.unsubscribe();
+    }
     this.uid = id;
-    this.days(7);
+    this.today();
   }
 
   uid;
@@ -24,6 +34,10 @@ export class EquipmentChartComponent implements OnInit {
     '19:00', '20:00', '21:00', '22:00', '23:00', '24:00'];
   type = 'line';
   data: any;
+  dataset = [];
+  datasetForse = [];
+  labels = [];
+  labelsForse = [];
   options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -57,8 +71,10 @@ export class EquipmentChartComponent implements OnInit {
     }
 
   };
+  itsSubscription: Subscription;
 
-  constructor(private equipmentService: EquipmentService) {
+  constructor(private equipmentService: EquipmentService, private socketIoService: SocketIoService) {
+
   }
 
 
@@ -68,9 +84,24 @@ export class EquipmentChartComponent implements OnInit {
   today() {
     this.dashboardActive = 'today';
     const today = moment().zone(0).hours(12);
-    this.equipmentService.getDataset(25, 'HOUR',
-      this.uid, today.toISOString(false)).subscribe(response => {
+    this.equipmentService.getDataSetRealTime(this.uid).subscribe(response => {
       this.dashboard(response);
+      this.itsSubscription = this.socketIoService.getStateDate(this.uid).subscribe((value) => {
+        console.log(value);
+        this.labels.shift();
+        this.dataset.shift();
+        this.labels.push((moment(value.its.dateTime).format('HH:mm:ss')));
+        this.dataset.push(value.its.value);
+        this.datasetForse = new Array(this.dataset.length - 1);
+        this.labelsForse = [];
+        this.datasetForse.push(value.its.value);
+        for (let i = 0; i < value.forecast.length; i = i + 10) {
+          this.labelsForse.push(moment(value.forecast[i].dateTime).format('HH:mm:ss'));
+          this.datasetForse.push(value.forecast[i].value);
+        }
+        this.createDataSet()
+
+      })
     });
 
 
@@ -94,40 +125,34 @@ export class EquipmentChartComponent implements OnInit {
     });
   }
 
-  dashboard(response) {
+  dashboard(response: ITS) {
     let data1 = [];
     let data2 = [];
-    response.valuesPast.forEach((item, index) => {
-      data1.push(Math.ceil(item * 100 / this.max));
-      data2.push(null);
-
-    });
-    data1.push(Math.ceil(response.valuesFuture[0] * 100 / this.max));
-    response.valuesFuture.forEach((item, index) => {
-      data2.push(Math.ceil(item * 100 / this.max));
-    });
-    this.data = {
-      labels: this.hourLabels,
-      datasets: [
-        {
-          data: data1,
-          backgroundColor: 'transparent',
-          borderColor: '#3e4eb8',
-          borderWidth: 1,
-          pointBackgroundColor:'#fff',
-          lineTension: 0,
-        },
-        {
-          data: data2,
-          backgroundColor: 'transparent',
-          borderColor: '#3e4eb8',
-          borderWidth: 1,
-          borderDash: [10, 5],
-          pointBackgroundColor:'#fff',
-          lineTension: 0,
-        }
-      ]
-    };
+    response.stateList.forEach((item, index) => {
+      this.labels.push((moment(item.dateTime).format('HH:mm:ss')));
+      this.dataset.push(item.value);
+      if (index === response.stateList.length - 1) {
+        this.datasetForse.push(item.value);
+      } else {
+        this.datasetForse.push(null);
+      }
+    })
+    console.log(this.labels)
+    for (let i = 0; i < response.forecastDataList.length; i = i + 10) {
+      this.labelsForse.push(moment(response.forecastDataList[i].dateTime).format('HH:mm:ss'));
+      this.datasetForse.push(response.forecastDataList[i].value);
+    }
+    console.log(response);
+    // response.valuesPast.forEach((item, index) => {
+    //   data1.push(Math.ceil(item * 100 / this.max));
+    //   data2.push(null);
+    //
+    // });
+    // data1.push(Math.ceil(response.valuesFuture[0] * 100 / this.max));
+    // response.valuesFuture.forEach((item, index) => {
+    //   data2.push(Math.ceil(item * 100 / this.max));
+    // });
+    this.createDataSet();
   }
 
   dashboardDay(response) {
@@ -155,7 +180,7 @@ export class EquipmentChartComponent implements OnInit {
           backgroundColor: 'transparent',
           borderColor: '#3e4eb8',
           borderWidth: 1,
-          pointBackgroundColor:'#fff',
+          pointBackgroundColor: '#fff',
           lineTension: 0,
         },
         {
@@ -164,11 +189,43 @@ export class EquipmentChartComponent implements OnInit {
           borderColor: '#3e4eb8',
           borderWidth: 1,
           borderDash: [10, 5],
-          pointBackgroundColor:'#fff',
+          pointBackgroundColor: '#fff',
           lineTension: 0,
         }
       ]
     };
+  }
+
+  createDataSet() {
+    let labels =[];
+    labels.push(...this.labels);
+    labels.push(...this.labelsForse)
+    this.data = {
+      labels: labels,
+      datasets: [
+        {
+          data: this.dataset,
+          backgroundColor: 'transparent',
+          borderColor: '#3e4eb8',
+          borderWidth: 1,
+          pointBackgroundColor: '#fff',
+          lineTension: 0,
+        },
+        {
+          data: this.datasetForse,
+          backgroundColor: 'transparent',
+          borderColor: '#3e4eb8',
+          borderWidth: 1,
+          borderDash: [10, 5],
+          pointBackgroundColor: '#fff',
+          lineTension: 0,
+        }
+      ]
+    };
+  }
+
+  ngOnDestroy() {
+    this.itsSubscription.unsubscribe();
   }
 
 }

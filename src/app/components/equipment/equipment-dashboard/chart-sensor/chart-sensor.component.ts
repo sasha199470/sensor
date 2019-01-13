@@ -15,7 +15,7 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
 
   @Input()
   set sensor(sensor: SensorInfo) {
-    console.log(sensor);
+    // console.log(sensor);
     this.dataset = [];
     this.labels = [];
     if (this.uid) {
@@ -63,7 +63,7 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
       titleFontSize: 0,
       callbacks: {
         label: function (tooltipItem, data) {
-          console.log(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
+          // console.log(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]);
           return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] + '%';
         }
       }
@@ -86,8 +86,8 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
     this.equipmentService.getSensorData(this.uid).subscribe(response => {
       this.dashboard(response);
       this.socketSubscribe = this.socketIoService.getSensorDate(this.uid).subscribe(response => {
-        console.log(moment(response.dateTime).format('HH:mm:ss'));
-        console.log(this.data.labels);
+        // console.log(moment(response.dateTime).format('HH:mm:ss'));
+        // console.log(this.data.labels);
         if (this.labels.length < 18) {
 
           this.labels.push(moment(response.dateTime).format('HH:mm:ss'));
@@ -127,7 +127,7 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
       this.dashboard(response);
       this.socketSubscribe = this.socketIoService.getSensorDate(this.uid)
         .subscribe(response => {
-          console.log(response);
+          // console.log(response);
           if (this.labels.length < 15) {
 
           }
@@ -204,8 +204,8 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log(6);
-    console.log(this.socketSubscribe);
+    // console.log(6);
+    // console.log(this.socketSubscribe);
     this.socketSubscribe.unsubscribe();
   }
 

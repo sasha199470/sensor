@@ -15,11 +15,11 @@
       </div>
       <p class="text-medium headline3 headline_color">{{defect.text}}</p>
     </div>
-    <div class="d-flex">
+    <div *ngIf="defect.recommendation" class="d-flex">
       <div class="defect-left d-flex align-items-center">
-        <img src="/assets/img/ic-maintenance.svg" alt="">
+         <img src="/assets/img/ic-maintenance.svg" alt="">
       </div>
-      <p class=" headline3 headline_color ">Паша, что тут писать?!</p>
+      <p class=" headline3 headline_color ">{{defect.recommendation}}</p>
     </div>
   </div>
 </div>

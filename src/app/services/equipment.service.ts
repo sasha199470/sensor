@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {Equipment} from '../dto/equipment';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {SensorData} from '../dto/sensor-data';
+import {ITS} from "../dto/its";
 
 
 @Injectable({
@@ -45,5 +46,8 @@ export class EquipmentService {
     return this.http.get<any>(`${this.BASE_URL}/equipment/${id}` + '/state',
       {params: params});
 
+  }
+  public getDataSetRealTime(id: string): Observable<ITS> {
+    return this.http.get<ITS>(`${this.BASE_URL}/equipment/${id}/state/real-time`);
   }
 }
