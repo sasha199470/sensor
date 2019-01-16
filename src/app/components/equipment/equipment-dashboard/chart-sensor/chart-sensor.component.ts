@@ -56,6 +56,7 @@ export class ChartSensorComponent implements OnInit, OnDestroy {
         propagate: false
       }
     },
+    animation: false,
     tooltips: {
       backgroundColor: '#3e4eb8',
       bodyFontColor: 'white',
