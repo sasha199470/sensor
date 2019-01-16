@@ -3,7 +3,7 @@
   </span>
 </div>
 <div *ngIf="equipment" class="row">
-  <div *ngIf="equipment.its" class="col-md px-1 px-lg-2">
+  <div class="col-md px-1 px-lg-2">
     <div class="block">
       <p class="headline2 headline_color text-medium pb-1">Общий ИТС, %</p>
       <p class="paragraph-color paragraph_midle pb-3">Вероятность определения
@@ -12,7 +12,7 @@
         <div *ngFor="let status of statuses" [ngClass]="{'col-md-5': status.color === currentStatus}"
              class="col col-lg p-0">
           <div [ngClass]="'itc-value itc-value-' + status.color">
-            <div *ngIf="status.color === currentStatus" class="itc-value-number white-color">{{equipment.its}}</div>
+            <div *ngIf="equipment.its != 0 && status.color === currentStatus" class="itc-value-number white-color">{{equipment.its}}</div>
           </div>
           <div class="interest">
             <p [ngClass]="{'d-none': status.color !== currentStatus}"
