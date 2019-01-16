@@ -57,6 +57,7 @@ export class EquipmentChartComponent implements OnInit, OnDestroy {
     legend: {
       display: false,
     },
+    animation: false,
     tooltips: {
       backgroundColor: '#3e4eb8',
       bodyFontColor: 'white',
