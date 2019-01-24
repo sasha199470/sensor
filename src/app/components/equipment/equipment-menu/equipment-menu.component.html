@@ -8,10 +8,11 @@
     </div>
   </div>
   <div *ngFor="let item of menu | async">
-    <div  (click)="openItem(item)" [ngClass]="'status_'+ item.equipmentStatus.toLowerCase()"
+    <div  (click)="openItem(item)" [ngClass]="'status_'+ item.equipmentStatus.toLowerCase() + ''
+    + item.active ?'':'opacity'"
          class="equipment-menu_item d-flex white_bg pl-4 align-items-center text_color status status_green outline"
          routerLinkActive="base-color" [routerLink]="'/equipment/' +item.id">
-      <p class=" text-medium headline3 equipment-menu_item_text">
+      <p [ngClass]="{opacity:!item.active}" class=" text-medium headline3 equipment-menu_item_text">
         {{item.title}}
       </p>
       <img *ngIf="item.children.length>0"  [ngClass]="{item_open:item.open}"
@@ -22,7 +23,7 @@
         <div (click)="openItem(item)" [ngClass]="'status_'+ item.equipmentStatus.toLowerCase()"
              class="equipment-menu_item deep_2 d-flex sub-item_bg pl-5 align-items-center text_color status status_green outline"
              routerLinkActive="base-color" [routerLink]="'/equipment/' +item.id">
-          <p class=" headline3 equipment-menu_item_text">
+          <p  [ngClass]="{opacity:!item.active}" class=" headline3 equipment-menu_item_text">
             {{item.title}}
           </p>
           <img *ngIf="item.children.length>0"  [ngClass]="{item_open:item.open}"
@@ -33,7 +34,7 @@
             <div [ngClass]="'status_'+ item.equipmentStatus.toLowerCase()"
                  class="equipment-menu_item deep_3 d-flex sub-sub-item_bg pl-6 align-items-center text_color status status_green outline"
                  routerLinkActive="base-color" [routerLink]="'/equipment/' +item.id">
-              <p class=" paragraph_medium equipment-menu_item_text">
+              <p [ngClass]="{opacity:!item.active}" class=" paragraph_medium equipment-menu_item_text">
                 {{item.title}}
               </p>
             </div>

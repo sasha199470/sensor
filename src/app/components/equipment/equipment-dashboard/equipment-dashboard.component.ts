@@ -6,7 +6,8 @@ import {flatMap, map} from 'rxjs/operators';
 import * as moment from 'moment';
 import {tap} from 'rxjs/internal/operators';
 import {EquipmentStoreService} from '../../../services/equipment-store.service';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {SocketIoService} from "../../../services/socketIo-service";
 
 
 @Component({
@@ -20,42 +21,59 @@ export class EquipmentDashboardComponent implements OnInit {
   id: string;
   currentStatus: string;
   breadCrumbs: string[] = [];
+  itsSubscription: Subscription;
   statuses = [
     {
       color: 'gray',
-      value: '100—85%'
+      value: '100—85%',
+      min: 85,
+      max: 100
     },
     {
       color: 'green',
-      value: '85—70%'
+      value: '85—70%',
+      min: 70,
+      max: 84
+
     },
     {
       color: 'yellow',
-      value: '70—50%'
+      value: '70—50%',
+      min: 50,
+      max: 69
     },
     {
       color: 'orange',
-      value: '50–25%'
+      value: '50–25%',
+      min: 25,
+      max: 49
     },
     {
       color: 'red',
-      value: '25–0%'
+      value: '25–0%',
+      min: 0,
+      max: 24
     }
   ];
 
   constructor(private route: ActivatedRoute, private equipmentService: EquipmentService,
-              private equipmentsStore: EquipmentStoreService) {
+              private equipmentsStore: EquipmentStoreService,
+              private socketIoService: SocketIoService) {
   }
 
   ngOnInit() {
     this.route.params
       .pipe(
-        tap(params => this.id = params['id'] || 0),
+        tap(params => { if (this.itsSubscription) {this.itsSubscription.unsubscribe()};
+                             this.id = params['id'] || 0 }),
         flatMap(params => this.equipmentService.getEquipment(params['id'] || 0))
       )
       .subscribe(equipment => {
         this.equipment = equipment;
         this.currentStatus = equipment.equipmentStatus.toLowerCase();
+        this.itsSubscription = this.socketIoService.getStateDate(this.id).subscribe((value) => {
+          this.equipment.its = value.its.value;
+        })
         this.resolveBreadCrumbs()
           .subscribe(breadCrumbs => this.breadCrumbs = breadCrumbs(equipment));
       });

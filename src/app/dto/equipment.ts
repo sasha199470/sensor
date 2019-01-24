@@ -2,6 +2,7 @@ import {DefectMessage} from './defect-message';
 import {SensorInfo} from './sensor-info';
 
 export class Equipment {
+  active: boolean;
   id: string;
   title: string;
   parentId: string;

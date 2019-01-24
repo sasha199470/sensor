@@ -13,7 +13,7 @@ export class SocketIoService {
   socketClient: SocketIOClient.Socket;
 
   constructor() {
-    this.socketClient = io.connect('http://127.0.0.1:9090');
+    this.socketClient = io.connect('http://192.168.1.61:9090');
   }
 
   public getSensorDate(id: string): Observable<SensorData> {
