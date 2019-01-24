@@ -12,10 +12,10 @@
         <div *ngFor="let status of statuses" [ngClass]="{'col-md-5': status.color === currentStatus}"
              class="col col-lg p-0">
           <div [ngClass]="'itc-value itc-value-' + status.color">
-            <div *ngIf="equipment.its != 0 && status.color === currentStatus" class="itc-value-number white-color">{{equipment.its}}</div>
+            <div *ngIf="status.max >=equipment.its && status.min <=equipment.its" class="itc-value-number white-color">{{equipment.its}}</div>
           </div>
           <div class="interest">
-            <p [ngClass]="{'d-none': status.color !== currentStatus}"
+            <p [ngClass]="{'d-none': !(status.max >=equipment.its && status.min <=equipment.its)}"
                class="text-center paragraph_small paragraph-color d-lg-block">
               {{status.value}}</p>
           </div>
