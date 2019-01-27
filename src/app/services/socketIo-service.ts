@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import * as io from 'socket.io-client';
 import {Observable} from 'rxjs';
 import {SensorData} from '../dto/sensor-data';
-import {ITS, ITSForecast} from "../dto/its";
 import {DefectMessage} from "../dto/defect-message";
 
 @Injectable({
@@ -35,12 +34,12 @@ export class SocketIoService {
     });
   }
 
-  public getStateDate(id: string): Observable<ITSForecast> {
+  public getStateDate(id: string): Observable<SensorData> {
     const socketClient = this.socketClient;
-    return new Observable<ITSForecast>(observer => {
-      const successListener = (value: SensorData, forecast: SensorData[]) => {
+    return new Observable<SensorData>(observer => {
+      const successListener = (value: SensorData) => {
         // console.log(value);
-        observer.next({its: value, forecast: forecast});
+        observer.next(value);
       };
       socketClient.emit('its.' + id);
       socketClient.on('its.' + id + '.input', successListener);
@@ -72,5 +71,23 @@ export class SocketIoService {
     });
   }
 
+  public getForecast(id: string): Observable<SensorData[]> {
+    const socketClient = this.socketClient;
+    return new Observable<SensorData[]>(observer => {
+      const successListener = (value: SensorData[]) => {
+        // console.log(value);
+        observer.next(value);
+      };
+      socketClient.emit('its-forecast.' + id);
+      socketClient.on('its-forecast.' + id + '.input', successListener);
+
+      return {
+        unsubscribe() {
+          // this.socketClient.emit('sensor-' + id + '-unsub');
+          socketClient.removeListener('its-forecast.' + id + '.input', successListener);
+        }
+      };
+    });
+  }
 
 }

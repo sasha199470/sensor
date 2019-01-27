@@ -72,7 +72,7 @@ export class EquipmentDashboardComponent implements OnInit {
         this.equipment = equipment;
         this.currentStatus = equipment.equipmentStatus.toLowerCase();
         this.itsSubscription = this.socketIoService.getStateDate(this.id).subscribe((value) => {
-          this.equipment.its = value.its.value;
+          this.equipment.its = value.value;
         })
         this.resolveBreadCrumbs()
           .subscribe(breadCrumbs => this.breadCrumbs = breadCrumbs(equipment));
